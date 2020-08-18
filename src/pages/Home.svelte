@@ -21,10 +21,15 @@ import PostForm from '../components/PostForm.svelte';
         console.log(post);
     }
 
-    function deletePost(){
-        console.log("Deleting post with id: ", id);
+    function deletePost(id){
+        fetch(` ${apiBaseUrl}+'/'+${id} `, {
+            method: 'DELETE'
+        }).then(res => {
+            return res.json()
+        }).then(() => {
+            posts = posts.filter(p => p.id !== id);
+        })
     }
-    
 </script>
 
 <style>
