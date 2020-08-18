@@ -3,7 +3,7 @@
 import { onMount } from 'svelte';
 import App from "../App.svelte";
 import About from"./about.svelte";
-
+import PostForm from './components/PostForm.svelte';
 
     const apiBaseUrl= 'https://jsonplaceholder.typicode.com/posts';
     let posts = [];
@@ -33,6 +33,11 @@ import About from"./about.svelte";
         margin-bottom: 10px;
     }
 </style>
+
+<div class="row">
+<div class="col s6">
+    <PostForm/>
+</div></div>
 
 <div class="row">
     {#if posts.length === 0}
