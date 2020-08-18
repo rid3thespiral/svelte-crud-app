@@ -8,6 +8,12 @@ import PostForm from '../components/PostForm.svelte';
     const apiBaseUrl= 'https://jsonplaceholder.typicode.com/posts';
     let posts = [];
 
+    let editingPost = {
+        body: '',
+        title: '',
+        id: null
+    }
+
     onMount( async () => {
         const response = await fetch(apiBaseUrl);
         posts = await response.json();
@@ -18,17 +24,18 @@ import PostForm from '../components/PostForm.svelte';
     }
 
     function editPost(post){
-        console.log(post);
+        editingPost = post
     }
 
     function deletePost(id){
-        fetch(` ${apiBaseUrl}+'/'+${id} `, {
+        if(confirm("are you sure?")){fetch(` ${apiBaseUrl}+'/'+${id} `, {
             method: 'DELETE'
         }).then(res => {
             return res.json()
         }).then(() => {
             posts = posts.filter(p => p.id !== id);
         })
+    }
     }
 </script>
 
@@ -45,7 +52,7 @@ import PostForm from '../components/PostForm.svelte';
 
 <div class="row">
 <div class="col s6">
-    <PostForm on:postCreated={addPost}/>
+    <PostForm on:postCreated={addPost} {editingPost}}/>
 </div></div>
 
 <div class="row">
