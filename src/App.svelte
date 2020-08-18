@@ -4,6 +4,8 @@
 
 	import {Router, Link, Route} from "svelte-routing";
 	import Navbar from './layout/Navbar.svelte';
+	import Home from './pages/home.svelte';
+	import About from './pages/about.svelte';
 </script>
 
 
@@ -15,6 +17,7 @@
 <Router>
 	<Navbar></Navbar>
 	<div class="container">
-		
+		<Route path="/" component={Home}></Route>
+		<Route path="/about" component={About}></Route>
 	</div>
 </Router>
