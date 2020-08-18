@@ -3,7 +3,7 @@
 import { onMount } from 'svelte';
 import App from "../App.svelte";
 import About from"./about.svelte";
-import PostForm from './components/PostForm.svelte';
+import PostForm from '../components/PostForm.svelte';
 
     const apiBaseUrl= 'https://jsonplaceholder.typicode.com/posts';
     let posts = [];
@@ -12,6 +12,10 @@ import PostForm from './components/PostForm.svelte';
         const response = await fetch(apiBaseUrl);
         posts = await response.json();
     })
+
+    function addPost({ detail: post}){
+        posts = [post, ...posts];
+    }
 
     function editPost(post){
         console.log(post);
@@ -36,7 +40,7 @@ import PostForm from './components/PostForm.svelte';
 
 <div class="row">
 <div class="col s6">
-    <PostForm/>
+    <PostForm on:postCreated={addPost}/>
 </div></div>
 
 <div class="row">
